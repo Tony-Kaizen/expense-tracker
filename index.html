@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Expense Tracker</title>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <!-- Input Section -->
+    <section id="input-section">
+      <div>
+
+        <!-- Current Balance -->
+        <div class="balance__container">
+          <h5 class="balance__title">Your Balance</h5>
+          <h2 class="balance__amount">$0.00</h2>
+        </div>
+
+        <!-- Income/Expense Amounts -->
+        <div class="inc-exp__container">
+          <!-- Income -->
+          <div class="income__container">
+            <h3>Income</h3>
+            <h3 class="income__number">$0.00</h3>
+          </div>
+          <!-- Expense -->
+          <div class="expense__container">
+            <h3>Expense</h3>
+            <h3 class="expense__number">$0.00</h3>
+          </div>
+        </div>
+
+        <!-- Add a new transaction -->
+        <div class="add-transac__container">
+          <h3>Add a new transaction</h3>
+        </div>
+
+        <!-- Income/Expense Buttons -->
+        <div class="inc-exp__btn__container">
+          <button id="income__btn">Income</button>
+          <button id="expense__btn">Expense</button>
+        </div>
+
+        <form action="">
+          <!-- Item title -->
+          <div class="item-title__container">
+            <h4>Title</h4>
+            <input type="text" name="text" placeholder="Enter text...">
+          </div>
+
+          <!-- Item Amount -->
+          <div class="item-amount__container">
+            <h4>Amount</h4>
+            <input type="number" name="number" placeholder="Enter amount...">
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" id="submit">Add transaction</button>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history-section">
+      <div>
+        <h2>History</h2>
+        <ul id="list">
+          <li>
+            <p>Italki</p>
+            <p>+350</p>
+            <button class="delete__btn">x</button>
+          </li>
+          <li>
+            <p>Italki</p>
+            <p>+350</p>
+            <button class="delete__btn">x</button>
+          </li>
+          <li>
+            <p>Italki</p>
+            <p>+350</p>
+            <button class="delete__btn">x</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2em;
+}
+
+input {
+  width: 100%;
+  font-size: 1em;
+}
+
+button {
+  border-radius: 5px;
+}
+
+.wrapper {
+  display: flex;
+  flex: row;
+}
+
+#input-section {
+  height: 100vh;
+  width: 50%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* background-color: black; */
+}
+
+#input-section > div {
+  height: 85vh;
+  width: 75%;
+}
+
+.balance__container {
+  margin-bottom: 1.5em;
+}
+
+.inc-exp__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.inc-exp__container > div {
+  width: 50%;
+  text-align: center;
+}
+
+.inc-exp__container > div:first-of-type {
+  border-right: 1px solid #ddd;
+}
+
+.add-transac__container {
+  margin-bottom: .75em;
+}
+
+.income__number {
+  color: #00EB2A;
+}
+
+.expense__number {
+  color: #EB0029;
+}
+
+.add-transac__container {
+  border-bottom: 1px solid #ddd;
+}
+
+.inc-exp__btn__container {
+  /* margin-bottom: 1.25em; */
+  margin-bottom: .75em;
+}
+
+#income__btn {
+  width: 49%;
+  padding: 10px 0px;
+  border: 3px solid #00EB2A;
+  background-color: transparent;
+  color: #00EB2A;
+  font-size: 26px;
+}
+
+#income__btn:hover, #income__btn:focus {
+  width: 49%;
+  padding: 10px 0px;
+  border: 3px solid #00EB2A;
+  background-color: #00EB2A;
+  color: #fff;
+  font-size: 26px;
+}
+
+#expense__btn {
+  width: 49%;
+  padding: 10px 0px;
+  border: 3px solid #EB0029;
+  background-color: transparent;
+  color: #EB0029;
+  font-size: 26px;
+}
+
+#expense__btn:hover, #expense__btn:focus  {
+  width: 49%;
+  padding: 10px 0px;
+  border: 3px solid #EB0029;
+  background-color: #EB0029;
+  color: #fff;
+  font-size: 26px;
+}
+
+.item-title__container, .item-amount__container {
+  margin-bottom: .75em;
+}
+
+#submit {
+  width: 100%;
+  padding: .5em 0;
+  border: 3px solid #6E40FF;
+  background-color: transparent;
+  color: #6E40FF;
+  font-size: 26px;
+}
+
+#submit:hover {
+  width: 100%;
+  padding: .5em 0;
+  border: 3px solid #6E40FF;
+  background-color: #6E40FF;
+  color: #fff;
+  font-size: 26px;
+}
+
+#history-section {
+  width: 50%;
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: #fff;  */
+}
+
+#history-section > div {
+  width: 75%;
+  margin-top: 1.75em;
+  text-align: center;
+}
+
+#history-section ul {
+  margin-top: 1.75em;
+  list-style-type: none;
+}
+
+#history-section li {
+  margin: 20px 0;
+  padding: 0 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  border-right: 7px solid #00EB2A;
+  -webkit-box-shadow: 1px 1px 9px -2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 1px 9px -2px rgba(0,0,0,0.75);
+  box-shadow: 1px 1px 9px -2px rgba(0,0,0,0.75);
+}
+
+/* .delete__btn {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  background-color: #EB0029;
+  border: 0;
+  padding: 0 8px;
+  font-size: 26px;
+  opacity: 0;
+  transition: opacity 0.3 ease;
+} */
+
+.income {
+  color: #00EB2A;
+}
+
+.expense {
+  color: #EB0029;
+}
+
+.submit {
+  color: #6E19FF;
+}
