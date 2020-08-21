@@ -32,8 +32,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  /* background-color: black; */
+  justify-content: center;  
 }
 
 #input-section > div {
@@ -41,10 +40,13 @@ button {
   width: 75%;
 }
 
+/* Total Balance: START */
 .balance__container {
   margin-bottom: 1.5em;
 }
+/* Total Balance: END */
 
+/* Income & Expense Balances: START */
 .inc-exp__container {
   display: flex;
   flex-direction: row;
@@ -61,10 +63,6 @@ button {
   border-right: 1px solid #ddd;
 }
 
-.add-transac__container {
-  margin-bottom: .75em;
-}
-
 .income__number {
   color: #00EB2A;
 }
@@ -72,50 +70,79 @@ button {
 .expense__number {
   color: #EB0029;
 }
+/* Income & Expense Balances: END */
 
+/* New Transaction Form: START */
 .add-transac__container {
+  margin-bottom: .75em;
   border-bottom: 1px solid #ddd;
 }
 
-.inc-exp__btn__container {
-  /* margin-bottom: 1.25em; */
+.inc-exp__btn__container {  
   margin-bottom: .75em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-#income__btn {
-  width: 49%;
-  padding: 10px 0px;
-  border: 3px solid #00EB2A;
-  background-color: transparent;
-  color: #00EB2A;
-  font-size: 26px;
+.inc-exp__btn__container p {
+  width: 30%;
 }
 
-#income__btn:hover, #income__btn:focus {
-  width: 49%;
-  padding: 10px 0px;
-  border: 3px solid #00EB2A;
+/* Income/Expense Toggler  */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #00EB2A;
-  color: #fff;
-  font-size: 26px;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
-#expense__btn {
-  width: 49%;
-  padding: 10px 0px;
-  border: 3px solid #EB0029;
-  background-color: transparent;
-  color: #EB0029;
-  font-size: 26px;
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
-#expense__btn:hover, #expense__btn:focus  {
-  width: 49%;
-  padding: 10px 0px;
-  border: 3px solid #EB0029;
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+input:checked + .slider {
   background-color: #EB0029;
-  color: #fff;
-  font-size: 26px;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(66px);
+  -ms-transform: translateX(66px);
+  transform: translateX(66px);
 }
 
 .item-title__container, .item-amount__container {
@@ -139,15 +166,16 @@ button {
   color: #fff;
   font-size: 26px;
 }
+/* New Transaction Form: END */
 
+/* History Section: START */
 #history-section {
   width: 50%;
   height: 100vh;
   overflow: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* background-color: #fff;  */
+  align-items: center;  
 }
 
 #history-section > div {
@@ -163,19 +191,56 @@ button {
 
 #history-section li {
   margin: 20px 0;
-  padding: 0 50px;
+  padding: 0 25px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  border-right: 7px solid #00EB2A;
+  /* border-right: 7px solid #00EB2A; */
   -webkit-box-shadow: 1px 1px 9px -2px rgba(0,0,0,0.75);
   -moz-box-shadow: 1px 1px 9px -2px rgba(0,0,0,0.75);
   box-shadow: 1px 1px 9px -2px rgba(0,0,0,0.75);
 }
 
+.plus {
+  border-right: 7px solid #00EB2A;
+}
+
+.minus {
+  border-right: 7px solid #EB0029;
+}
+
+li > button {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  background-color: #EB0029;
+  border: 0;
+  padding: 0 8px;
+  font-size: 26px;
+}
+
+li:hover > button {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  background-color: #EB0029;
+  border: 0;
+  padding: 0 8px;
+  font-size: 26px;
+}
+/* History Section: END */
+
+
+
+
 /* .delete__btn {
+  display: none;
   position: absolute;
   top: 50%;
   left: 0;
