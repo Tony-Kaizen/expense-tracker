@@ -36,7 +36,7 @@ db.collection('transactions').orderBy("created_at", "desc").onSnapshot(snapshot 
   });
 });
 
-//add transaction to database
+//add transaction form
 function addTransaction(e) {
   e.preventDefault();
 
@@ -59,6 +59,7 @@ function addTransaction(e) {
       created_at: firebase.firestore.Timestamp.fromDate(now)
     }
 
+    //add transaction to database
     db.collection('transactions').add(transaction)
       .then(() => console.log('transaction added!'))
       .catch(err => console.log(err));
@@ -75,9 +76,6 @@ list.addEventListener('click', e => {
       console.log('transaction deleted from db!');
     });
   }
-
-  //update values
-  updateValues();
 });
 
 //add transaction to DOM
@@ -101,8 +99,6 @@ function addTransactionDOM(transaction, id) {
 
   //add item to list of transactions
   list.appendChild(item);
-
-  updateValues();
 }
 
 //delete transaction from the DOM
@@ -114,30 +110,31 @@ function deleteTransactionDOM(id) {
       transaction.remove();
     }
   });
-
-  updateValues();
 }
 
-/*
 //update balance, income and expenses
 function updateValues() {
   const amounts = transactions.map(transaction => transaction.amount);
 
-  const total = amounts.reduce((acc, item) => {
-    return acc += item;
-  }, 0);
+  const total = amounts
+    .reduce((acc, transaction) => (acc += transaction), 0)
+    .toFixed(2);
 
-  // const getPositives = (arr) => {
-  //   return arr.filter(item => item > 0).reduce((a, b) => a += b);
-  // };
+  const income = amounts
+    .filter(transaction => transaction > 0)
+    .reduce((acc, transaction) => (acc += transaction), 0)
+    .toFixed(2);
 
-  console.log(total);
+  const expense = amounts
+    .filter(transaction => transaction < 0)
+    .reduce((acc, transaction) => (acc -= transaction), 0)
+    .toFixed(2);
 
   balance.innerText = `$${total}`;
-  // incomeAmt.innerText = `$${income}`;
-  // expenseAmt.innerText = `$${expense}`;
+  incomeAmt.innerText = `$${income}`;
+  expenseAmt.innerText = `$${expense}`;
 }
-*/
+
 
 //event listener
 form.addEventListener('submit', addTransaction);
