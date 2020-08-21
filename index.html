@@ -41,23 +41,28 @@
           <h3>Add a new transaction</h3>
         </div>
 
-        <!-- Income/Expense Buttons -->
+        <!-- Income/Expense Toggler -->
         <div class="inc-exp__btn__container">
-          <button id="income__btn">Income</button>
-          <button id="expense__btn">Expense</button>
+          <p>income</p>
+          <label class="switch">
+            <input type="checkbox" id="transac__toggler">
+            <span class="slider round"></span>
+          </label>
+          <p>expense</p>
         </div>
 
+        <!-- New Transaction Form -->
         <form action="">
           <!-- Item title -->
           <div class="item-title__container">
             <h4>Title</h4>
-            <input type="text" name="text" placeholder="Enter text...">
+            <input type="text" name="name" placeholder="Enter text...">
           </div>
 
           <!-- Item Amount -->
           <div class="item-amount__container">
             <h4>Amount</h4>
-            <input type="number" name="number" placeholder="Enter amount...">
+            <input type="number" name="amount" step=".01" placeholder="Enter amount...">
           </div>
 
           <!-- Submit button -->
@@ -77,16 +82,6 @@
             <p>+350</p>
             <button class="delete__btn">x</button>
           </li>
-          <li>
-            <p>Italki</p>
-            <p>+350</p>
-            <button class="delete__btn">x</button>
-          </li>
-          <li>
-            <p>Italki</p>
-            <p>+350</p>
-            <button class="delete__btn">x</button>
-          </li>
         </ul>
       </div>
     </section>
@@ -94,6 +89,26 @@
   </div>
 
   <!-- JavaScript -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCY8a3QyP2Tac6xZdvwqpDoWVhXJYGI3oU",
+      authDomain: "expense-tracker-405d7.firebaseapp.com",
+      databaseURL: "https://expense-tracker-405d7.firebaseio.com",
+      projectId: "expense-tracker-405d7",
+      storageBucket: "expense-tracker-405d7.appspot.com",
+      messagingSenderId: "287684946615",
+      appId: "1:287684946615:web:3e1967ad1c7e9d62367b32"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
   <script src="app.js"></script>
 </body>
 
