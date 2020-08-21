@@ -1,5 +1,5 @@
 //total balance
-const balance = document.querySelector('.balance__amount');
+let balance = document.querySelector('.balance__amount');
 
 //current income & expenses
 let incomeAmt = document.querySelector('.income__number');
@@ -17,17 +17,21 @@ const list = document.querySelector('#list');
 let transactions = [];
 
 // get transactions (real-time listener)
-db.collection('transactions').onSnapshot(snapshot => {
+db.collection('transactions').orderBy("created_at", "desc").onSnapshot(snapshot => {
   snapshot.docChanges().forEach(change => {
     const doc = change.doc;
     if (change.type === 'added') {
       //push transactions to array
       transactions.push(doc.data());
-
-      //add transactions to DOM
+      //add transactions to DOM 
       addTransactionDOM(doc.data(), doc.id);
+      //update values
+      updateValues();
     } else if (change.type === 'removed') {
-      //do something
+      //remove transacton from the DOM
+      deleteTransactionDOM(doc.id);
+      //update values
+      updateValues();
     }
   });
 });
@@ -44,17 +48,37 @@ function addTransaction(e) {
     form.amount.value = Math.abs(form.amount.value)
   }
 
-  const transaction = {
-    name: `${form.name.value}`,
-    amount: `${form.amount.value}`
+  //check to see if form fields are empty, then submit form
+  if (!form.name.value.trim() || !form.amount.value.trim()) {
+    alert('Please enter a transaction name and amount.')
+  } else {
+    const now = new Date();
+    const transaction = {
+      name: form.name.value,
+      amount: +form.amount.value,
+      created_at: firebase.firestore.Timestamp.fromDate(now)
+    }
+
+    db.collection('transactions').add(transaction)
+      .then(() => console.log('transaction added!'))
+      .catch(err => console.log(err));
+
+    form.reset();
+  }
+}
+
+//delete transaction from the database
+list.addEventListener('click', e => {
+  if (e.target.tagName === 'BUTTON') {
+    const id = e.target.parentElement.getAttribute('id')
+    db.collection('transactions').doc(id).delete().then(() => {
+      console.log('transaction deleted from db!');
+    });
   }
 
-  db.collection('transactions').add(transaction)
-    .then(() => console.log('transaction added!'))
-    .catch(err => console.log(err));
-
-  form.reset();
-}
+  //update values
+  updateValues();
+});
 
 //add transaction to DOM
 function addTransactionDOM(transaction, id) {
@@ -65,17 +89,55 @@ function addTransactionDOM(transaction, id) {
   //add class based on value
   item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
 
+  //set unique id for element
+  item.setAttribute('id', `${id}`)
+
   //html template
   item.innerHTML = `
     <p>${transaction.name}</p>
     <p>${transaction.amount}</p>
-    <button id="${id}" class="delete__btn">x</button>
+    <button class="delete__btn">x</button>
   `
 
   //add item to list of transactions
-  list.prepend(item);
+  list.appendChild(item);
 
+  updateValues();
 }
+
+//delete transaction from the DOM
+function deleteTransactionDOM(id) {
+  const transactions = document.querySelectorAll('li');
+
+  transactions.forEach(transaction => {
+    if (transaction.getAttribute('id') === id) {
+      transaction.remove();
+    }
+  });
+
+  updateValues();
+}
+
+/*
+//update balance, income and expenses
+function updateValues() {
+  const amounts = transactions.map(transaction => transaction.amount);
+
+  const total = amounts.reduce((acc, item) => {
+    return acc += item;
+  }, 0);
+
+  // const getPositives = (arr) => {
+  //   return arr.filter(item => item > 0).reduce((a, b) => a += b);
+  // };
+
+  console.log(total);
+
+  balance.innerText = `$${total}`;
+  // incomeAmt.innerText = `$${income}`;
+  // expenseAmt.innerText = `$${expense}`;
+}
+*/
 
 //event listener
 form.addEventListener('submit', addTransaction);
